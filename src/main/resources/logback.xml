@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="logging.path" value="/data/logs/nsfocus/segmenter" />
+
+    <appender name="FILE-OUT"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logging.path}/qn.log</file>
+        <encoder>
+            <pattern>[%level] %d{yyyy-MM-dd HH:mm:ss} [%class:%line] - %m %n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logging.path}/qn.%d{yyyy-MM-dd}.log.zip
+            </fileNamePattern>
+            <!-- 30 days -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+    </appender>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符
+            <pattern>[%level] %d{yyyy-MM-dd HH:mm:ss} [%class:%line] - %m %n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE-OUT" />
+    </root>
+</configuration>
